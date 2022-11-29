@@ -3,6 +3,9 @@
 [Jump to Instructions](#instructions)
 
 ## Intro
+MauiJerry: I'm working on a smart camera using raspberry Pi 4 to do various video processing (OpenCV/MachineLearning) and pass it to a PC for rendering.  See [my project on Hackaday](https://hackaday.io/project/188345-pose2art-smartcam-to-touchdesigner-unity-via-osc)
+
+This project provides an initial step in using the main software components, although it runs only on the same PC as TouchDesigner.  My fork changes some minor things, at least in the initial version, so it will work on the rPi and over a network.  The OSC messages are NOT standardized and will likely change as we add more functionality.
 
 ### Preface
 
