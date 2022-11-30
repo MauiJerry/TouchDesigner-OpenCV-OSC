@@ -7,6 +7,8 @@ MauiJerry: I'm working on a smart camera using raspberry Pi 4 to do various vide
 
 This project provides an initial step in using the main software components, although it runs only on the same PC as TouchDesigner.  My fork changes some minor things, at least in the initial version, so it will work on the rPi and over a network.  The OSC messages are NOT standardized and will likely change as we add more functionality.
 
+First step is documenting in the TOE with Text DATs, and changing the server IP address in the python.
+
 ### Preface
 
 I started working with OpenCV in TouchDesigner using the ScriptTOP. I got started by using this great tutorial by The Interactive & Immersive HQ, [Easy Feature Tracking with Script TOP and OpenCV in TouchDesigner](https://www.youtube.com/watch?v=1Uw2PWTR_XM). While this example is awesome it only goes as far to drawing on top of our image in OpenCV. In a [subsequent tutorial](https://www.youtube.com/watch?v=c-Sx1xo9sYQ) they show you how you can extract the data from OpenCV into a TableDAT in TouchDesigner. Now we have free reign to do what we please!

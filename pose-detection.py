@@ -4,7 +4,8 @@ from pythonosc import udp_client
 
 # Create our UDP client which we'll send OSC through
 # Change the URL and port to whatever fits your needs
-UDP_URL = "127.0.0.1"
+# mauiJerry: use our PC's static ip in prep for running on Raspberry Pi
+UDP_URL = "10.10.10.10" #"127.0.0.1"
 UDP_PORT = 5005
 client = udp_client.SimpleUDPClient(UDP_URL, UDP_PORT)
 
