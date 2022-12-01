@@ -8,6 +8,7 @@ MauiJerry: I'm working on a smart camera using raspberry Pi 4 to do various vide
 This project provides an initial step in using the main software components, although it runs only on the same PC as TouchDesigner.  My fork changes some minor things, at least in the initial version, so it will work on the rPi and over a network.  The OSC messages are NOT standardized and will likely change as we add more functionality.
 
 First step is documenting in the TOE with Text DATs, and changing the server IP address in the python.
+Second step was to run it on rPi4. Alas there is not a working version of mediapipe for the Pi4/Buster64 at this time.
 
 ### Preface
 
