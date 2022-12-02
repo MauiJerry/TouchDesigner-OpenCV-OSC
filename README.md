@@ -70,6 +70,8 @@ So far I haven't had an issue with the Python not reading the web cam.
 
 Try changing the numbers in `cap = cv2.VideoCapture(0)`. Your webcam may be at another index, like `cap = cv2.VideoCapture(1)`. If still not resolved I would Google the issue.
 
+jerry: the pose-detection.py app has the camera access, prohibiting TD from grabbing it. Might be able to stream images and merge those.  Note you have to start the python app Before TD or TD will grab camera and prohibit pose-detection from accesssing it.
+
 ## Todo:
 
 1. Name the individual pose landmarks so that instead of the OSC channels being `landmark-27-x` they would be `landmark-right-wrist-x`.
