@@ -3,13 +3,13 @@
 [Jump to Instructions](#instructions)
 
 ## Intro
-MauiJerry: I'm working on a smart camera using raspberry Pi 4 to do various video processing (OpenCV/MachineLearning) and pass it to a PC for rendering.  See [my project on Hackaday](https://hackaday.io/project/188345-pose2art-smartcam-to-touchdesigner-unity-via-osc)
+MauiJerry: I'm working on a smart camera using raspberry Pi 4 to do various video processing (OpenCV/MachineLearning) and pass it to a PC for rendering.  See [my project on Hackaday](https://hackaday.io/project/188345-pose2art-smartcam-to-touchdesigner-unity-via-osc).  
+I found and forked [cronin4392's project](https://github.com/cronin4392/TouchDesigner-OpenCV-OSC) to start this one. Alas this project's Pose tool in python wont work for the rPi. Firstly there is no MediaPipe library for the pi4, and secondly, python is too slow on rPi4. I have [another project](https://github.com/MauiJerry/TFL_PoseToOSC) written in C++ that runs about 8fps on the raspberry pi 4 TensorFlowLite.
 
-This project provides an initial step in using the main software components, although it runs only on the same PC as TouchDesigner.  My fork changes some minor things, at least in the initial version, so it will work on the rPi and over a network.  The OSC messages are NOT standardized and will likely change as we add more functionality.
+My fork of cronin4392 uses a fixed URL (10.10.10.10) for the TD side. The OSC messages are NOT standardized and will likely change as we add more functionality. I added three (image_width, image_height, numLandmarks) while figuring out the different data streams from python and c++.
+I added a bunch of TextDAT to document flow in the TD toe
 
-First step is documenting in the TOE with Text DATs, and changing the server IP address in the python.
-Second step was to run it on rPi4. Alas there is not a working version of mediapipe for the Pi4/Buster64 at this time.
-
+cronin readme starts here
 ### Preface
 
 I started working with OpenCV in TouchDesigner using the ScriptTOP. I got started by using this great tutorial by The Interactive & Immersive HQ, [Easy Feature Tracking with Script TOP and OpenCV in TouchDesigner](https://www.youtube.com/watch?v=1Uw2PWTR_XM). While this example is awesome it only goes as far to drawing on top of our image in OpenCV. In a [subsequent tutorial](https://www.youtube.com/watch?v=c-Sx1xo9sYQ) they show you how you can extract the data from OpenCV into a TableDAT in TouchDesigner. Now we have free reign to do what we please!
