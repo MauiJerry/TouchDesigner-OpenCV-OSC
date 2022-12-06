@@ -1,4 +1,5 @@
 # modified from orig: new URL, added OSC msgs for image h,w, numchannels
+# forked from https://github.com/cronin4392/TouchDesigner-OpenCV-OSC
 import cv2
 import mediapipe as mp
 from pythonosc import udp_client
@@ -31,11 +32,12 @@ while True:
     results = pose.process(imgRGB)
 
     if results.pose_landmarks:
+        # first time, count number of landmarks pose model finds
         if num_landmarks < 1:
             # how do we get len/size of landmarks?
             for id, lm in enumerate(results.pose_landmarks.landmark):
                 num_landmarks = num_landmarks+1
-
+        # draw landmark connection lines (skeleton)
         mpDraw.draw_landmarks(img, results.pose_landmarks, mpPose.POSE_CONNECTIONS)
 
         client.send_message(f"/image-height", image_height)
@@ -44,18 +46,17 @@ while True:
         print("height, width, num marks", image_height, image_width,num_landmarks)
 
         for id, lm in enumerate(results.pose_landmarks.landmark):
-            h, w, c = img.shape
             x = lm.x
             y = lm.y
             z = lm.z
 
             # Send our values over OSC
             client.send_message(f"/landmark-{id}-x", x)
-            client.send_message(f"/landmark-{id}-y", adjustY(y, w, h))
+            client.send_message(f"/landmark-{id}-y", adjustY(y, image_width, image_height))
             client.send_message(f"/landmark-{id}-z", z)
 
             # Draw circles on the pose areas. This is purely for debugging
-            cx, cy = int(x * w), int(y * h)
+            cx, cy = int(x * image_width), int(y * image_height)
             cv2.circle(img, (cx, cy), 5, (255,0,0), cv2.FILLED)
 
     cv2.imshow("Image", img)
