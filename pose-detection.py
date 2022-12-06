@@ -1,3 +1,4 @@
+# modified from orig: new URL, added OSC msgs for image h,w, numchannels
 import cv2
 import mediapipe as mp
 from pythonosc import udp_client
@@ -22,13 +23,25 @@ cap = cv2.VideoCapture(0)
 def adjustY(y, w, h):
     return (1 - y) * (h / w)
 
+num_landmarks =0
 while True:
     success, img = cap.read()
     imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    image_height, image_width, _ = imgRGB.shape
     results = pose.process(imgRGB)
 
     if results.pose_landmarks:
+        if num_landmarks < 1:
+            # how do we get len/size of landmarks?
+            for id, lm in enumerate(results.pose_landmarks.landmark):
+                num_landmarks = num_landmarks+1
+
         mpDraw.draw_landmarks(img, results.pose_landmarks, mpPose.POSE_CONNECTIONS)
+
+        client.send_message(f"/image-height", image_height)
+        client.send_message(f"/image-width", image_width)
+        client.send_message(f"/numLandmarks", num_landmarks)
+        print("height, width, num marks", image_height, image_width,num_landmarks)
 
         for id, lm in enumerate(results.pose_landmarks.landmark):
             h, w, c = img.shape
